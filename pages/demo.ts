@@ -1,13 +1,13 @@
 import gatsbyText from './gatsby.txt' with { type: 'text' }
 import {
   layout,
-  layoutWithLines,
   prepare,
   prepareWithSegments,
   type LayoutLine,
   type PreparedText,
   type PreparedTextWithSegments,
 } from '../src/layout.ts'
+import { collectLines } from './line-utils.ts'
 
 const FONT = '20px "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif'
 const LINE_HEIGHT = 32
@@ -104,7 +104,7 @@ function render(): void {
   manualStage.style.setProperty('--copy-width', `${width}px`)
 
   const fast = layout(prepared.opaque, width, LINE_HEIGHT)
-  const rich = layoutWithLines(prepared.rich, width, LINE_HEIGHT)
+  const rich = collectLines(prepared.rich, width, LINE_HEIGHT)
 
   manualStage.textContent = ''
   manualStage.style.height = `${rich.height}px`

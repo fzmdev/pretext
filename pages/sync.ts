@@ -1,13 +1,12 @@
 import gatsbyText from './gatsby.txt' with { type: 'text' }
 import mixedAppText from '../corpora/mixed-app-text.txt' with { type: 'text' }
 import {
-  layoutWithLines,
   prepareWithSegments,
   type LayoutCursor,
   type LayoutLine,
-  type LayoutLinesResult,
   type PreparedTextWithSegments,
 } from '../src/layout.ts'
+import { collectLines, type CollectedLines } from './line-utils.ts'
 
 const FONT = '20px "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif'
 const LINE_HEIGHT = 32
@@ -158,7 +157,7 @@ function setActiveAnchor(anchor: LayoutCursor | null, sourcePane: Pane | null, s
   }
 }
 
-function renderPane(pane: Pane, laidOut: LayoutLinesResult, width: number): void {
+function renderPane(pane: Pane, laidOut: CollectedLines, width: number): void {
   pane.lines = laidOut.lines
   pane.stage.replaceChildren()
   pane.lineElements = []
@@ -227,7 +226,7 @@ function render(): void {
 
   for (const pane of panes) {
     const width = parseInt(pane.widthInput.value, 10)
-    const laidOut = layoutWithLines(prepared, width, LINE_HEIGHT)
+    const laidOut = collectLines(prepared, width, LINE_HEIGHT)
     renderPane(pane, laidOut, width)
   }
 

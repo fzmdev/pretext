@@ -1,11 +1,11 @@
 import gatsbyText from './gatsby.txt' with { type: 'text' }
 import mixedAppText from '../corpora/mixed-app-text.txt' with { type: 'text' }
 import {
-  layoutWithLines,
   prepareWithSegments,
   type LayoutLine,
   type PreparedTextWithSegments,
 } from '../src/layout.ts'
+import { collectLines } from './line-utils.ts'
 
 const FONT = '20px "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif'
 const LINE_HEIGHT = 32
@@ -102,7 +102,7 @@ function render(): void {
 
   spread.style.width = `${spreadWidth}px`
   const columnWidth = Math.floor(stages[0]!.getBoundingClientRect().width)
-  const laidOut = layoutWithLines(getPrepared(excerpt), columnWidth, LINE_HEIGHT)
+  const laidOut = collectLines(getPrepared(excerpt), columnWidth, LINE_HEIGHT)
 
   const totalLines = laidOut.lines.length
   const capacity = COLUMN_COUNT * targetLines
