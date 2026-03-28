@@ -50,7 +50,13 @@
     .a5 { color: rgba(196,163,90,0.50); } .a6 { color: rgba(196,163,90,0.60); }
     .a7 { color: rgba(196,163,90,0.70); } .a8 { color: rgba(196,163,90,0.80); }
     .a9 { color: rgba(196,163,90,0.90); } .a10 { color: rgba(196,163,90,1.0); }
-    .credit { position: fixed; bottom: 12px; right: 16px; font: 400 11px/1 "Helvetica Neue"; color: rgba(255,255,255,0.1); }
+    .credit {
+      position: fixed; bottom: 12px; right: 16px; z-index: 20;
+      font: 400 11px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: rgba(255,255,255,0.28);
+      text-decoration: none;
+    }
+    .credit:hover { color: rgba(255,255,255,0.44); }
   </style>
 </head>
 <body>
@@ -73,7 +79,7 @@
       <div class="art-box" id="mono-box"></div>
     </div>
   </div>
-  <div class="credit">Built with pretext</div>
+  <a class="credit" href="https://x.com/somnai_dreams" target="_blank" rel="noreferrer">Made by @somnai_dreams</a>
 
   <script type="module" src="./variable-typographic-ascii.ts"></script>
 </body>
